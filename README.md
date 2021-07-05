@@ -1,5 +1,3 @@
-# FinalProject
-
 # A MapReduce-Based Parallel Clustering Algorithm
 # for Large Protein-Protein Interaction Networks
 
