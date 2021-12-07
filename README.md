@@ -23,12 +23,12 @@ Descrizione dei codici
 ###################################
 
 
-# Classi:
+# Classi Java:
 
-# *JcomeJava*
-Si tratta della classe main del nostro progetto.
-Metodi:
-- CreateInput:
+> *JcomeJava*
+>> Si tratta della classe main del nostro progetto.
+>> Metodi:
+>> - CreateInput:
 Input: JavaPairRDD di archi;
 NB:  	Struttura di una singola proteina:
 NodeId  Root  Neighbors | Distance | Color | Path
