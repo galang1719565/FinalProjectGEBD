@@ -28,7 +28,7 @@ Descrizione dei codici
 
 Si tratta della classe main del nostro progetto.\
 Metodi:
-- CreateInput:\
+- CreateInput\
 Input: JavaPairRDD di archi;\
 Output: File di input n x n.
 > NB:  	Struttura di una singola proteina: <NodeId  Root  Neighbors | Distance | Color | Path>\
@@ -36,13 +36,13 @@ Output: File di input n x n.
 > Il prodotto cartesiano con tutti i nodi restituisce triplette (nodo, nodo, lista di vicini);\
 > Attraverso il reduce step, si ottengono le corrette liste di vicini;\
 > I campi mancanti vengono inizializzati con la tripletta (0, "WHITE", null);\
-- ***ForwardMR***\
-> Input: JavaRDD di protein;\
-> ***ForwardMR***;\
+- ***ForwardMR***
+Input: JavaRDD di protein;\
+Output: JavaRDD di protein;
+> ***ForwardMR***[^4];\
 > ***Pairing***;\
 > ***GetNeigh***;\
-> ***Recontruct***;\
-	Output: JavaRDD di protein;\
+> ***Recontruct***;
 - BackwardMR
 	Input: numero step, file di input della singola componente (esplorato)
 Si considerano tutti gli archi;
@@ -102,7 +102,7 @@ Controllo per evitare che ci siano archi che si ripetano.
 Output: Lista di archi.
 
 
-ForwardMR
+## 4. *ForwardMR*
 (FlatMapFunction)
 Input: Proteina
 Per l’esplorazione del grafo.
