@@ -76,13 +76,14 @@ Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)\
 	- Ciclo while (finché tutta la componente non viene esplorata)
 		ForwardMR;
 	- Calcolo della betweeness attraverso BackwardMR.
+	
 Calcolo della misura BC attraverso ComputeBC;\
 Eliminazione dell’arco con betweeness massima;\
 Aggiungo alla lista BC il risultato ottenuto.\
 Definisco l’oggetto Q=(step, lista di componenti);\
 Q2 è il prodotto cartesiano tra Q e la lista di tutti gli archi;\
-ComputeDamnQ\
-QComparator\
+ComputeDamnQ;\
+QComparator.
 
 
 
