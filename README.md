@@ -27,7 +27,7 @@ Descrizione dei codici
 
 # *JcomeJava*
 
-Si tratta della classe main del nostro progetto.
+Si tratta della classe main del nostro progetto.\
 Metodi:
 - CreateInput:
 Input: JavaPairRDD di archi;
