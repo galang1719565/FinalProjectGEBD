@@ -39,7 +39,7 @@ Output: File di input n x n.
 - **ForwardMR**\
 Input: JavaRDD di protein;\
 Output: JavaRDD di protein;
-> ***ForwardMR*** [^4];
+> ***ForwardMR*** ^[4]^;\
 > ***Pairing***[^5];\
 > ***GetNeigh***[^6];\
 > ***Recontruct***[^7];
