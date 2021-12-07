@@ -24,19 +24,19 @@ Descrizione dei codici
 
 # Classi Java:
 
-# *JcomeJava*
+## 1. *JcomeJava*
 
 Si tratta della classe main del nostro progetto.\
-Metodi:\
+Metodi:
 - CreateInput:\
 Input: JavaPairRDD di archi;\
 NB:  	Struttura di una singola proteina:\
-\tNodeId  Root  Neighbors | Distance | Color | Path\
+NodeId  Root  Neighbors | Distance | Color | Path\
 Per ogni arco (a,b) vengono generate le coppie (a,lista=<b>) e (b,lista=<a>);\
 Il prodotto cartesiano con tutti i nodi restituisce triplette (nodo, nodo, lista di vicini);\
 Attraverso il reduce step, si ottengono le corrette liste di vicini;\
 I campi mancanti vengono inizializzati con la tripletta (0, "WHITE", null);\
-Output: File di input n x n.\
+Output: File di input n x n.
 - ForwardMR\
 Input: JavaRDD di protein;\
 ForwardMR;\
@@ -92,12 +92,12 @@ Algoritmo:
 
 
 
-DividiComponentiCheck
+## 2. *DividiComponentiCheck*
 Input: Lista di archi;
 Divisione degli archi in componenti connesse, basata sulla verifica effettuata dal metodo check (fissato un arco e1=(a,b), questo viene comparato ad un altro arco e2=(c,d): se a o b compare in e2 il metodo ritorna true; altrimenti falso).
 Output: Lista di liste di archi;
 
-Check
+## 3. *Check*
 Input: Lista di archi.
 Controllo per evitare che ci siano archi che si ripetano.
 Output: Lista di archi.
