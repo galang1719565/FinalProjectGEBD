@@ -61,7 +61,7 @@ Input: lista (step, lista di archi della componente) , (arco, betweenness);
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 > ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-##### Algoritmo:
+#### **Algoritmo**:
 	
 > Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
 	
