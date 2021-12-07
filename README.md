@@ -61,26 +61,28 @@ Input: lista (step, lista di archi della componente) , (arco, betweenness);
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 > ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-###### Algoritmo:
-> Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.\
-Interfaccia Neo4J: creazione del grafo di partenza;
-Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;
-Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)
- ***DividiComponentiCheck***[2];
- ***Check***[3]; 
- Per ogni componente connessa:
+##### Algoritmo:
+	
+> Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
+	
+Interfaccia Neo4J: creazione del grafo di partenza;\
+Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;\
+Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)\
+- ***DividiComponentiCheck***[2];
+- ***Check***[3]; 
+- Per ogni componente connessa:
 	- CreateInput;
 	- Inizializzazione dei nodi dove NodeId=Root -> Color = “GREY”;
 	- Ciclo while (finché tutta la componente non viene esplorata)
 		ForwardMR;
 	- Calcolo della betweeness attraverso BackwardMR.
-	>Calcolo della misura BC attraverso ComputeBC;
-	>Eliminazione dell’arco con betweeness massima;
-	>Aggiungo alla lista BC il risultato ottenuto.
->Definisco l’oggetto Q=(step, lista di componenti);
->Q2 è il prodotto cartesiano tra Q e la lista di tutti gli archi;
->ComputeDamnQ
->QComparator
+Calcolo della misura BC attraverso ComputeBC;\
+Eliminazione dell’arco con betweeness massima;\
+Aggiungo alla lista BC il risultato ottenuto.\
+Definisco l’oggetto Q=(step, lista di componenti);\
+Q2 è il prodotto cartesiano tra Q e la lista di tutti gli archi;\
+ComputeDamnQ\
+QComparator\
 
 
 
