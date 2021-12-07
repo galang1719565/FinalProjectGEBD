@@ -27,9 +27,9 @@ con un numero di elementi superiore a 10: nel nostro caso il numero di component
 
 
 
-# Classi Java:
+### Classi Java:
 
-## 1. *JcomeJava*
+##### 1. *JcomeJava*
 
 Si tratta della classe main del nostro progetto.\
 **Metodi**:
@@ -61,8 +61,8 @@ Input: lista (step, lista di archi della componente) , (arco, betweenness);
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 > ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-##### Algoritmo:
-> Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
+######## Algoritmo:
+> Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.\
  Interfaccia Neo4J: creazione del grafo di partenza;
  Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;
  Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)
