@@ -15,7 +15,12 @@ Il nostro algoritmo è costituito da 12 classi Java. Segue una breve descrizione
 
 
 
-Descrizione dei codici
+/*
+Non qua - Osservazioni varie per parlare del dataset
+I dataset reali disponibili sono nel sito dip.doe-mbi.ucla.edu/dip da cui è tratto in particolare quello da noi utilizzato: R.Norv - 666 proteine, 619 iterazioni.
+Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse
+con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a 15.
+*/
 
 
 
@@ -56,25 +61,14 @@ Input: lista (step, lista di archi della componente) , (arco, betweenness);
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 > ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-
-
-/*
-Non qua - Osservazioni varie per parlare del dataset
-I dataset reali disponibili sono nel sito dip.doe-mbi.ucla.edu/dip da cui è tratto in particolare quello da noi utilizzato: R.Norv - 666 proteine, 619 iterazioni.
-Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse
-con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a 15.
-*/
-
-Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
-
-
-Interfaccia Neo4J: creazione del grafo di partenza;
-Algoritmo:
->Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;
->Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)
-> DividiComponentiCheck;
-	> Check;
-	>Per ogni componente connessa:
+##### Algoritmo:
+> Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
+ Interfaccia Neo4J: creazione del grafo di partenza;
+ Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;
+ Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)
+ ***DividiComponentiCheck***[2];
+ ***Check***[3]; 
+ Per ogni componente connessa:
 	- CreateInput;
 	- Inizializzazione dei nodi dove NodeId=Root -> Color = “GREY”;
 	- Ciclo while (finché tutta la componente non viene esplorata)
