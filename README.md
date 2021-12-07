@@ -1,4 +1,6 @@
-Breve descrizione del progetto
+# A MapReduce-Based Parallel Clustering Algorithm
+# for Large Protein-Protein Interaction Networks
+
 Lo scopo del nostro progetto è individuare all’interno di un insieme di proteine delle interazioni fra coppie di esse. Laddove per “interazioni” intendiamo analogie fisiche oppure funzionali. Per farlo partiamo innanzitutto considerando questo insieme come un grafo, con le proteine al posto di nodi e le loro interazioni al posto degli archi.
 Affrontare questo argomento dal punto di vista computazionale significa raggruppare i nodi del grafo per mettere in evidenza queste relazioni.
 La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici. 
@@ -21,9 +23,9 @@ Descrizione dei codici
 ###################################
 
 
-Classi:
+# Classi:
 
-JcomeJava
+# *JcomeJava*
 Si tratta della classe main del nostro progetto.
 Metodi:
 - CreateInput:
