@@ -27,8 +27,8 @@ Descrizione dei codici
 ## 1. *JcomeJava*
 
 Si tratta della classe main del nostro progetto.\
-Metodi:
-- CreateInput\
+**Metodi**:
+- **CreateInput**\
 Input: JavaPairRDD di archi;\
 Output: File di input n x n.
 > NB:  	Struttura di una singola proteina: <NodeId  Root  Neighbors | Distance | Color | Path>\
@@ -36,26 +36,25 @@ Output: File di input n x n.
 > Il prodotto cartesiano con tutti i nodi restituisce triplette (nodo, nodo, lista di vicini);\
 > Attraverso il reduce step, si ottengono le corrette liste di vicini;\
 > I campi mancanti vengono inizializzati con la tripletta (0, "WHITE", null);\
-- ***ForwardMR***
+- **ForwardMR**\
 Input: JavaRDD di protein;\
 Output: JavaRDD di protein;
 > ***ForwardMR***[^4];\
-> ***Pairing***;\
-> ***GetNeigh***;\
-> ***Recontruct***;
-- BackwardMR
-	Input: numero step, file di input della singola componente (esplorato)
-Si considerano tutti gli archi;
-	Si prendono le coppie (arco,1);
-	Attraverso il reduce step si ottengono le coppie (arco, numero di occorrenze);
-Dividendo per n*(n-1) il valore della coppia, si ottengono (arco, betweenness);
-EdgesComparator restituisce l’arco con betweenness massima.
-	Output: (numero step, lista di archi della componente) , (arco, betweenness) 
-- ComputeBC
-	Input: lista (step, lista di archi della componente) , (arco, betweenness)
-	EdgesComparator l’arco con betweenness massima tra quelli con betweenness
-	massima nella propria componente.
-	Output: quartetto (step, lista di archi della componente) , (arco, betweenness)
+> ***Pairing***[^5];\
+> ***GetNeigh***[^6];\
+> ***Recontruct***[^7];
+- **BackwardMR**\
+Input: numero step, file di input della singola componente (esplorato);\
+Output: (numero step, lista di archi della componente) , (arco, betweenness) .
+> Si considerano tutti gli archi;\
+> Si prendono le coppie (arco,1);\
+> Attraverso il reduce step si ottengono le coppie (arco, numero di occorrenze);\
+> Dividendo per n*(n-1) il valore della coppia, si ottengono (arco, betweenness);\
+> ***EdgesComparator***[^8] restituisce l’arco con betweenness massima.
+- **ComputeBC**\
+Input: lista (step, lista di archi della componente) , (arco, betweenness);
+Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
+> ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
 
 
