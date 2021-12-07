@@ -25,19 +25,19 @@ Descrizione dei codici
 
 # Classi Java:
 
-> *JcomeJava*
->> Si tratta della classe main del nostro progetto.
->> Metodi:
->> - CreateInput:
-Input: JavaPairRDD di archi;
-NB:  	Struttura di una singola proteina:
-NodeId  Root  Neighbors | Distance | Color | Path
-Per ogni arco (a,b) vengono generate le coppie (a,lista=<b>) e (b,lista=<a>);
-Il prodotto cartesiano con tutti i nodi restituisce triplette (nodo, nodo, lista di vicini);
-Attraverso il reduce step, si ottengono le corrette liste di vicini;
-I campi mancanti vengono inizializzati con la tripletta (0, "WHITE", null);
-Output: File di input n x n.
-- ForwardMR
+# *JcomeJava*
+Si tratta della classe main del nostro progetto.
+Metodi:
+> - CreateInput:
+> Input: JavaPairRDD di archi;
+> NB:  	Struttura di una singola proteina:
+> NodeId  Root  Neighbors | Distance | Color | Path
+> Per ogni arco (a,b) vengono generate le coppie (a,lista=<b>) e (b,lista=<a>);
+> Il prodotto cartesiano con tutti i nodi restituisce triplette (nodo, nodo, lista di vicini);
+> Attraverso il reduce step, si ottengono le corrette liste di vicini;
+> I campi mancanti vengono inizializzati con la tripletta (0, "WHITE", null);
+> Output: File di input n x n.
+> - ForwardMR
 	Input: JavaRDD di protein;
 	ForwardMR;
 Pairing;
