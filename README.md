@@ -27,13 +27,13 @@ con un numero di elementi superiore a 10: nel nostro caso il numero di component
 
 
 
-## Classi Java:
+# Classi Java:
 
-### 1. *JcomeJava*
+## 1. *JcomeJava*
 
 Si tratta della classe main del nostro progetto.\
 **Metodi**:
-- **CreateInput**\
+- # **CreateInput**\
 Input: JavaPairRDD di archi;\
 Output: File di input n x n.
 > NB:  	Struttura di una singola proteina: <NodeId  Root  Neighbors | Distance | Color | Path>\
@@ -45,9 +45,9 @@ Output: File di input n x n.
 Input: JavaRDD di protein;\
 Output: JavaRDD di protein;
 > ***ForwardMR*** <sup>[4]</sup>;\
-> ***Pairing***[^5];\
-> ***GetNeigh***[^6];\
-> ***Recontruct***[^7];
+> ***Pairing***<sup>[5]</sup>;\
+> ***GetNeigh***<sup>[6]</sup>;\
+> ***Recontruct***<sup>[7]</sup>;
 - **BackwardMR**\
 Input: numero step, file di input della singola componente (esplorato);\
 Output: (numero step, lista di archi della componente) , (arco, betweenness) .
@@ -55,21 +55,23 @@ Output: (numero step, lista di archi della componente) , (arco, betweenness) .
 > Si prendono le coppie (arco,1);\
 > Attraverso il reduce step si ottengono le coppie (arco, numero di occorrenze);\
 > Dividendo per n*(n-1) il valore della coppia, si ottengono (arco, betweenness);\
-> ***EdgesComparator***[^8] restituisce l’arco con betweenness massima.
+> ***EdgesComparator***<sup>[8]</sup> restituisce l’arco con betweenness massima.
 - **ComputeBC**\
 Input: lista (step, lista di archi della componente) , (arco, betweenness);
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
-> ***EdgesComparator***[^8] restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
+> ***EdgesComparator***<sup>[4]</sup> restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-#### **Algoritmo**:
+### **Algoritmo**:
 	
 > Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
 	
 Interfaccia Neo4J: creazione del grafo di partenza;\
-Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo ottimo corrispondente;\
-Ciclo while (in questo caso la limitazione è dato dal numero massimo di step)\
-- ***DividiComponentiCheck***[2];
-- ***Check***[3]; 
+Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo corrispondente;\
+Ciclo while 
+> (in questo caso la limitazione è dato dal numero massimo di step,\
+	altrimenti la procedura prevede l'esaurimento di tutti gli archi)\
+- ***DividiComponentiCheck***<sup>[2]</sup>;
+- ***Check***<sup>[3]</sup>; 
 - Per ogni componente connessa:
 	- CreateInput;
 	- Inizializzazione dei nodi dove NodeId=Root -> Color = “GREY”;
