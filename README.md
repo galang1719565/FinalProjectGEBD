@@ -149,13 +149,12 @@ Output: Grafo = (lista delle componenti, Q).
 > - f [ i ][ i ] = numero di archi della componente i / E, se i=j;
 > - f [ i ][ j ] = f [ j ][ i ] = damnEdges / E, se i!=j.\
 > Calcolo Q attraverso DamnQ.
-- ***damnEdges***
-		
+- ***damnEdges***\
 Input: (archi della componente i, archi della componente j, tutti gli archi);\
 Output: conteggio.
 > Rimozione degli archi delle componenti i e j da tutti gli archi;\
-> Conteggio degli archi rimanenti connessi con le due componenti attraverso Link.
-- ***Link***\		
+> Conteggio degli archi rimanenti connessi con le due componenti attraverso ***Link***.
+- ***Link***\
 Input: (arco (a,b), lista della componente i , lista della componente j);\
 Output: TRUE se a o b compare in una delle componenti .
 - ***DamnQ***\
