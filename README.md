@@ -77,7 +77,7 @@ Ciclo while
 	- Ciclo while (finché tutta la componente non viene esplorata)
 		- ***ForwardMR***;
 	- Calcolo della betweeness attraverso ***BackwardMR***.
-- Calcolo della misura BC attraverso ***ComputeBC***;
+- Calcolo della betweeness massima tra tutte le componenti attraverso ***ComputeBC***;
 - Eliminazione dell’arco con betweeness massima;
 - Aggiungo alla lista BC il risultato ottenuto.
 
@@ -98,7 +98,7 @@ Output: Lista di archi.
 > Controllo per evitare che ci siano archi che si ripetano.
 
 ### 4. *ForwardMR*
-> (FlatMapFunction)
+> (FlatMapFunction)\
 Input: Proteina;\
 Output: Lista di proteine.
 > Per l’esplorazione del grafo.
