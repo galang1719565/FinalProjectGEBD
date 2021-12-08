@@ -2,15 +2,16 @@
 # for Large Protein-Protein Interaction Networks
 
 Lo scopo del nostro progetto è individuare le iterazioni all’interno di un insieme di proteine.\
-La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici.\
+La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici.
+
 L'approccio è stato quello di considerare questo insieme di proteine e di iterazioni come i nodi e gli archi di un grafo, motivo per cui la scelta di implementare ***Neo4J*** è risultata alquanto naturale.\
 \
 Dal punto di vista pratico, l'algoritmo visita l'intero grafo, da ogni nodo, determinando quindi le componenti connesse ed in particolare i cammini minimi.
 Dalle occorrenze degli archi e dalla grandezza della componente interessata ricaviamo la ***betweeness***, una misura che quantifica il flusso che interessa un determinato arco.
 L’arco con la betweenness massima viene eliminato dal grafo.\
 Rilevante è il caso in cui quest'operazione restituisca un grafo con un numero di componenti connesse maggiore.\
-Per poter scegliere quante componenti considerare, entra in gioco ***Q***, una misura che tiene conto degli archi ancora presenti, confrontandoli con quelli originali.
-***Q*** è il nostro criterio di ottimizzazione.\
+Per poter scegliere quante componenti considerare, entra in gioco ***Q***, una misura che tiene conto degli archi ancora presenti, confrontandoli con quelli originali.\
+***Q*** è il nostro criterio di ottimizzazione.
 
 Il problema è evidentemente un problema di flusso, ma si tratta anche di un problema di clusterizzazione: la ricerca dell'ottimo consiste nel trovare i gruppi di proteine che interagiscono più tra loro separandoli dal resto della rete PPI.
 
@@ -28,7 +29,8 @@ Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni
 # Classi Java:
 
 ## 1. *JcomeJava*
-Si tratta della classe main del nostro progetto.\
+Si tratta della classe main del nostro progetto.
+
 ***Metodi***:
 - ***CreateInput***\
 Input: JavaPairRDD di archi;\
