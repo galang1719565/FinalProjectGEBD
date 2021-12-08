@@ -89,31 +89,29 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 
 
 ## 2. *DividiComponentiCheck*
-Input: Lista di archi;
-Divisione degli archi in componenti connesse, basata sulla verifica effettuata dal metodo check (fissato un arco e1=(a,b), questo viene comparato ad un altro arco e2=(c,d): se a o b compare in e2 il metodo ritorna true; altrimenti falso).
+Input: Lista di archi;\
 Output: Lista di liste di archi;
+> Divisione degli archi in componenti connesse, basata sulla verifica effettuata dal metodo ***check*** (fissato un arco e1=(a,b), questo viene comparato ad un altro arco e2=(c,d): se a o b compare in e2 il metodo ritorna true; altrimenti falso).
 
 ## 3. *Check*
 Input: Lista di archi.
-Controllo per evitare che ci siano archi che si ripetano.
 Output: Lista di archi.
+> Controllo per evitare che ci siano archi che si ripetano.
 
-
-## 4. *ForwardMR*
-(FlatMapFunction)
+### 4. *ForwardMR*
+> (FlatMapFunction)
 Input: Proteina
-Per l’esplorazione del grafo.
-Il codice è eseguito solo quando la proteina in questione è di colore GREY:
->Il nodo viene esaminato;
->Se esiste, si estrapola il path corrente;
->Per ogni nodo nella lista dei neighbors:
-Si genera la proteina
-(nodo neighbors corrente, nodo esaminato, null | 
-distanza corrente +1, GREY, path corrente + arco (nodo neigh, nodo esaminato) );
->Si genera una nuova proteina a quella di partenza, ma di colore BLACK;
 Output: Lista di proteine
+> Per l’esplorazione del grafo.
+> Il codice è eseguito solo quando la proteina in questione è di colore GREY:
+> - Il nodo viene esaminato;
+> - Se esiste, si estrapola il path corrente;
+> - Per ogni nodo nella lista dei neighbors:
+>   - Si genera la proteina\
+	< nodo neighbors corrente, nodo esaminato, null | distanza corrente +1, GREY, path corrente + arco (nodo neigh, nodo esaminato) >;
+> - Si genera una nuova proteina a quella di partenza, ma di colore BLACK;
 
-Pairing
+### 5. *Pairing*
 (PairFunction)
 Input: Proteine
 La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path > viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
