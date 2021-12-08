@@ -113,13 +113,17 @@ Output: Lista di proteine.
 > - Si genera una nuova proteina a quella di partenza, ma di colore BLACK;
 
 ### 5. *Pairing*
+
 > (PairFunction)
+
 Input: Proteine;\
 Output: Proteine (destrutturate).
 > La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path > viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
 
 ### 6. *GetNeigh*
+
 > (ReduceByKey)
+
 Input: Proteine (destrutturate: < (NodeId  Root), (Neighbors | Distance | Color | Path) >);\
 Output: Proteine (destrutturate).
 > Identificate dalla chiave (NodeId, Root), la classe recupera il quartetto di valori delle proteine privilegando quelli generati dalla classe ForwardMR, aggiornati, piuttosto che quelli originali.
@@ -130,7 +134,9 @@ Output: Proteine .
 > Si torna alla struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path >.
 
 ### 8. *EdgesComparator*
+
 > (Comparator)
+
 Input: coppie (arco, betweeness);\
 Output: (arco, betweeness).
 > Individuazione della betweeness massima.
@@ -143,24 +149,28 @@ Output: (lista delle componenti, Q).
 > - f [ i ][ i ] = numero di archi della componente i / E, se i=j;
 > - f [ i ][ j ] = f [ j ][ i ] = damnEdges / E, se i!=j.\
 > Calcolo Q attraverso DamnQ.
-- ***damnEdges***\ 
+- ***damnEdges***
+		
 Input: (archi della componente i, archi della componente j, tutti gli archi);\
 Output: conteggio.
 > Rimozione degli archi delle componenti i e j da tutti gli archi;\
 > Conteggio degli archi rimanenti connessi con le due componenti attraverso Link.
-- Link
+- ***Link***\
+		
 Input: (arco (a,b), lista della componente i , lista della componente j);\
 Output: TRUE se a o b compare in una delle componenti .
-- DamnQ\
+- ***DamnQ***\
 Input: (numero di componenti, matrice f)\;
 Output: Q.
 > Calcolo di Q.
 
 ### 10. *QComparator*
-(Comparator)
+
+> (Comparator)
+
 Input: coppie (lista delle componenti, Q)
-Individuazione della Q massima.
 Output: (lista delle componenti, Q)
+> Individuazione della Q massima.
 
 
 
