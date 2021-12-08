@@ -98,7 +98,9 @@ Output: Lista di archi.
 > Controllo per evitare che ci siano archi che si ripetano.
 
 ### 4. *ForwardMR*
-> (FlatMapFunction)\
+
+> (FlatMapFunction)
+
 Input: Proteina;\
 Output: Lista di proteine.
 > Per l’esplorazione del grafo.
