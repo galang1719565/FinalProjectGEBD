@@ -11,16 +11,13 @@ L’arco con la betweenness massima viene eliminato dal grafo, perché è molto 
 A questo punto ripetiamo questi passaggi finché abbiamo archi a disposizione. Questo renderà il grafo sconnesso e poi aumenterà sempre di più il numero di componenti connesse. Queste componenti saranno i nostri cluster. 
 
 
-Il nostro algoritmo è costituito da 12 classi Java. Segue una breve descrizione di ogni classe.   
 
 
 
-/*
-Non qua - Osservazioni varie per parlare del dataset
-I dataset reali disponibili sono nel sito dip.doe-mbi.ucla.edu/dip da cui è tratto in particolare quello da noi utilizzato: R.Norv - 666 proteine, 619 iterazioni.
-Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse
-con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a 15.
-*/
+# Dataset
+I dataset reali disponibili sono nel sito dip.doe-mbi.ucla.edu/dip da cui è tratto in particolare quello da noi utilizzato:
+> ***R.Norv*** - 666 proteine, 619 iterazioni.
+Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a **15**.
 
 
 
@@ -166,8 +163,8 @@ Output: Q.
 
 > (Comparator)
 
-Input: coppie (lista delle componenti, Q)
-Output: (lista delle componenti, Q)
+Input: coppie (lista delle componenti, Q);\
+Output: (lista delle componenti, Q).
 > Individuazione della Q massima.
 
 
