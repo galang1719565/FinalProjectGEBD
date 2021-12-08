@@ -30,7 +30,6 @@ con un numero di elementi superiore a 10: nel nostro caso il numero di component
 # Classi Java:
 
 ## 1. *JcomeJava*
-
 Si tratta della classe main del nostro progetto.\
 ***Metodi***:
 - ***CreateInput***\
@@ -88,19 +87,19 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 
 
 
-## 2. *DividiComponentiCheck*
+### 2. *DividiComponentiCheck*
 Input: Lista di archi;\
 Output: Lista di liste di archi;
 > Divisione degli archi in componenti connesse, basata sulla verifica effettuata dal metodo ***check*** (fissato un arco e1=(a,b), questo viene comparato ad un altro arco e2=(c,d): se a o b compare in e2 il metodo ritorna true; altrimenti falso).
 
-## 3. *Check*
-Input: Lista di archi.
+### 3. *Check*
+Input: Lista di archi.\
 Output: Lista di archi.
 > Controllo per evitare che ci siano archi che si ripetano.
 
 ### 4. *ForwardMR*
 > (FlatMapFunction)
-Input: Proteina
+Input: Proteina\
 Output: Lista di proteine
 > Per l’esplorazione del grafo.
 > Il codice è eseguito solo quando la proteina in questione è di colore GREY:
@@ -112,42 +111,42 @@ Output: Lista di proteine
 > - Si genera una nuova proteina a quella di partenza, ma di colore BLACK;
 
 ### 5. *Pairing*
-(PairFunction)
-Input: Proteine
-La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path > viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
+> (PairFunction)
+Input: Proteine\
 Output: Proteine (destrutturate)
+> La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path > viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
 
-GetNeigh
-(ReduceByKey)
-Input: Proteine (destrutturate: < (NodeId  Root), (Neighbors | Distance | Color | Path) >)
-Identificate dalla chiave (NodeId, Root), la classe recupera il quartetto di valori privilegando quelli generati dalla classe ForwardMR, aggiornati, piuttosto che quelli originali.
+### 6. *GetNeigh*
+> (ReduceByKey)
+Input: Proteine (destrutturate: < (NodeId  Root), (Neighbors | Distance | Color | Path) >)\
 Output: Proteine (destrutturate)
+> Identificate dalla chiave (NodeId, Root), la classe recupera il quartetto di valori delle proteine privilegando quelli generati dalla classe ForwardMR, aggiornati, piuttosto che quelli originali.
 
-Recontruct
-Input: Proteine (destrutturate: < (NodeId  Root), (Neighbors | Distance | Color | Path) >)
-Si torna alla struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path >.
+### 7. *Recontruct*
+Input: Proteine (destrutturate: < (NodeId  Root), (Neighbors | Distance | Color | Path) >)\
 Output: Proteine 
+> Si torna alla struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path >.
 
-EdgesComparator
-(Comparator)
-Input: coppie (arco, betweeness)
-Individuazione della betweeness massima.
+### 8. *EdgesComparator*
+> (Comparator)
+Input: coppie (arco, betweeness)\
 Output: (arco, betweeness)
+> Individuazione della betweeness massima.
 
-ComputeDamnQ
-Input: coppie (lista delle componenti, lista di tutti gli archi)
-Siano E=|{tutti gli archi}|, C=|{componenti connessa}|, 
-costruisco la matrice f dove f [ i ][ j ] =
-f [ i ][ i ] = numero di archi della componente i / E, se i=j;
-f [ i ][ j ] = f [ j ][ i ] = damnEdges / E, se i!=j.
-Calcolo Q attraverso DamnQ.
+### 9. *ComputeDamnQ*
+Input: coppie (lista delle componenti, lista di tutti gli archi)\
 Output: (lista delle componenti, Q)
->damnEdges 
-Input: (archi della componente i, archi della componente j, tutti gli archi)
+> Siano E=|{tutti gli archi}|, C=|{componenti connessa}|, costruisco la matrice f dove \
+> f [ i ][ j ] =\
+> - f [ i ][ i ] = numero di archi della componente i / E, se i=j;
+> - f [ i ][ j ] = f [ j ][ i ] = damnEdges / E, se i!=j.
+> Calcolo Q attraverso DamnQ.
+- damnEdges 
+> Input: (archi della componente i, archi della componente j, tutti gli archi)
+> Output: conteggio
 Rimozione degli archi delle componenti i e j da tutti gli archi;
 Conteggio degli archi rimanenti connessi con le due componenti attraverso Link.
-Output: conteggio
->>Link
+- Link
 Input: (arco (a,b), lista della componente i , lista della componente j)
 Output: TRUE se a o b compare in una delle componenti 
 >DamnQ
