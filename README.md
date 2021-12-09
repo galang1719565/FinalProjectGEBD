@@ -26,10 +26,9 @@ Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni
 
 
 
-# Classi Java:
+# Classe main:
 
-## 1. *JcomeJava*
-Si tratta della classe main del nostro progetto.
+## *JcomeJava*
 
 ***Metodi***:
 - ***CreateInput***\
@@ -63,7 +62,8 @@ Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 ### **Algoritmo**:
 	
 > Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
-	
+
+Lettura del file txt codificato come lista di archi;
 Interfaccia Neo4J: creazione del grafo di partenza;\
 Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo corrispondente;\
 Ciclo while 
@@ -73,6 +73,7 @@ Ciclo while
 - ***Check***<sup>[3]</sup>; 
 - Per ogni componente connessa:
 	- ***CreateInput***;
+	> Viene definita la struttura delle proteine<sup>[1]</sup>
 	- Inizializzazione dei nodi dove NodeId=Root -> Color = “GREY”;
 	- Ciclo while (finché tutta la componente non viene esplorata)
 		- ***ForwardMR***;
@@ -85,7 +86,15 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 ***ComputeDamnQ***<sup>[9]</sup>;\
 ***QComparator***<sup>[10]</sup>.
 
+	
+	
+	
 
+## Altre classi:
+
+### 1. *Protein*
+Si tratta del costruttore.
+> < NodeId  Root  Neighbors | Distance | Color | Path >
 
 ### 2. *DividiComponentiCheck*
 Input: Lista di archi;\
@@ -118,7 +127,8 @@ Output: Lista di proteine.
 
 Input: Proteine;\
 Output: Proteine (destrutturate).
-> La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path > viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
+> La struttura monolitica < NodeId  Root  Neighbors | Distance | Color | Path >\
+> viene divisa in una coppia < (NodeId  Root), (Neighbors | Distance | Color | Path) >
 
 ### 6. *GetNeigh*
 
