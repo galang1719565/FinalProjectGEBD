@@ -93,8 +93,13 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 ## Altre classi:
 
 ### *JcomeToy*
-Classe che applica l'algoritmo ad un dataset di prova.
-![Dataset di prova](https://github.com/galang.1719565/FinalProject/blob/master/Toy.jpg?raw=true)
+> Classe che applica l'algoritmo ad un dataset di prova.
+
+![Dataset di prova](Toy.jpg)
+
+> Si osservi come sia presente un arco, evidenziato in figura, in cui il flusso è evidentemente concentrato e di conseguenza presenterà una ***betweeness*** elevata.
+> Eliminato questo arco, le due componenti connesse ottenute appaiono fortemente connesse. Motivo per il quale ci si aspetta che ulteriori eliminazioni siano superflue: è difatti il grafo ottimo secondo ***Q***.
+	
 ### 1. *Protein*
 Si tratta del costruttore.
 > < NodeId  Root  Neighbors | Distance | Color | Path >
