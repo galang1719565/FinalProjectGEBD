@@ -94,8 +94,7 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 
 ### *JcomeToy*
 Classe che applica l'algoritmo ad un dataset di prova.
-![Dataset di prova](/assets/images/newToy - Neo4J.jpg)
-	
+![Dataset di prova](https://github.com/galang.1719565/FinalProject/blob/master/Toy.jpg?raw=true)
 ### 1. *Protein*
 Si tratta del costruttore.
 > < NodeId  Root  Neighbors | Distance | Color | Path >
