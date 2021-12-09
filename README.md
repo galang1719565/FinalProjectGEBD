@@ -17,7 +17,7 @@ Il problema è evidentemente un problema di flusso, ma si tratta anche di un pro
 
 # Dataset
 I dataset reali sono disponibili nel sito del [Database of Interacting Proteins](dip.doe-mbi.ucla.edu/dip) da cui è tratto in particolare quello da noi utilizzato:
-> ***R.Norv*** - 666 proteine, 619 iterazioni.
+> [***R.Norv***](https://github.com/galang1719565/FinalProjectGEBD/blob/master/Rnorv20170205.txt) - 666 proteine, 619 iterazioni.
 
 Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a **15**.
 
