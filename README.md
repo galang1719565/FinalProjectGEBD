@@ -1,6 +1,14 @@
 # A MapReduce-Based Parallel Clustering Algorithm
 # for Large Protein-Protein Interaction Networks
 
+> Corso di\
+> Gestione ed Elaborazione di Big Data\
+> \
+> Progetto a cura di:\
+>   Galang Julian Vincent de Guia\
+>   Tatangelo Francesco\
+>   Imperatori Giammarco
+
 Lo scopo del nostro progetto è individuare le iterazioni all’interno di un insieme di proteine.\
 La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici.
 
