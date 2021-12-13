@@ -15,7 +15,7 @@ La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (
 L'approccio è stato quello di considerare questo insieme di proteine e di iterazioni come i nodi e gli archi di un grafo, motivo per cui la scelta di implementare ***Neo4J*** è risultata alquanto naturale.\
 \
 Dal punto di vista pratico, l'algoritmo visita l'intero grafo, da ogni nodo, determinando quindi le componenti connesse ed in particolare i cammini minimi.
-Dalle occorrenze degli archi e dalla grandezza della componente interessata ricaviamo la ***betweeness***, una misura che quantifica il flusso che interessa un determinato arco.
+Dalle occorrenze degli archi e dalla grandezza della componente interessata ricaviamo la ***betweenness***, una misura che quantifica il flusso che interessa un determinato arco.
 L’arco con la betweenness massima viene eliminato dal grafo.\
 Rilevante è il caso in cui quest'operazione restituisca un grafo con un numero di componenti connesse maggiore.\
 Per poter scegliere quante componenti considerare, entra in gioco ***Q***, una misura che tiene conto degli archi ancora presenti, confrontandoli con quelli originali.\
@@ -85,9 +85,9 @@ Ciclo while
 	- Inizializzazione dei nodi dove NodeId=Root -> Color = “GREY”;
 	- Ciclo while (finché tutta la componente non viene esplorata)
 		- ***ForwardMR***;
-	- Calcolo della betweeness attraverso ***BackwardMR***.
-- Calcolo della betweeness massima tra tutte le componenti attraverso ***ComputeBC***;
-- Eliminazione dell’arco con betweeness massima;
+	- Calcolo della betweenness attraverso ***BackwardMR***.
+- Calcolo della betweenness massima tra tutte le componenti attraverso ***ComputeBC***;
+- Eliminazione dell’arco con betweenness massima;
 - Aggiungo alla lista BC il risultato ottenuto.
 
 Definisco l’oggetto Q=(step, lista di componenti);\
@@ -105,7 +105,7 @@ Definisco l’oggetto Q=(step, lista di componenti);\
 
 ![Dataset di prova](Toy.jpg)
 
-> Si osservi come sia presente un arco, evidenziato in figura, in cui il flusso è evidentemente concentrato e di conseguenza presenterà una ***betweeness*** elevata.
+> Si osservi come sia presente un arco, evidenziato in figura, in cui il flusso è evidentemente concentrato e di conseguenza presenterà una ***betweenness*** elevata.
 > Eliminato questo arco, le due componenti connesse ottenute appaiono fortemente connesse. Motivo per il quale ci si aspetta che ulteriori eliminazioni siano superflue: è difatti il grafo ottimo secondo ***Q***.
 	
 ### 1. *Protein*
@@ -163,9 +163,9 @@ Output: Proteine .
 
 > (Comparator)
 
-Input: coppie (arco, betweeness);\
-Output: (arco, betweeness).
-> Individuazione della betweeness massima.
+Input: coppie (arco, betweenness);\
+Output: (arco, betweenness).
+> Individuazione della betweenness massima.
 
 ### 9. *ComputeDamnQ*
 Input: coppie (lista delle componenti, lista di tutti gli archi);\
@@ -195,6 +195,5 @@ Output: Q.
 Input: coppie (lista delle componenti, Q);\
 Output: (lista delle componenti, Q).
 > Individuazione della Q massima.
-
 
 
