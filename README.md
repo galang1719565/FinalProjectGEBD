@@ -4,10 +4,10 @@
 > Corso di\
 > Gestione ed Elaborazione di Big Data\
 > \
-> Progetto a cura di:\
->   Galang Julian Vincent de Guia\
->   Tatangelo Francesco\
->   Imperatori Giammarco
+> Progetto a cura di:
+>  - Galang Julian Vincent de Guia
+>  - Tatangelo Francesco
+>  - Imperatori Giammarco
 
 Lo scopo del nostro progetto è individuare le iterazioni all’interno di un insieme di proteine.\
 La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici.
@@ -67,18 +67,20 @@ Input: lista (step, lista di archi della componente) , (arco, betweenness);\
 Output: quartetto (step, lista di archi della componente) , (arco, betweenness).
 > ***EdgesComparator***<sup>[4]</sup> restituisce l’arco con betweenness massima tra quelli con betweenness massima nella propria componente.
 
-### **Algoritmo**:
+
+
+## **Algoritmo**:
 	
 > Data l’onerosità del codice, il numero massimo di iterazioni è impostato a 5.
 
-Lettura del file txt codificato come lista di archi;
-Interfaccia Neo4J: creazione del grafo di partenza;\
+Lettura del file txt codificato come lista di archi;\
 Lista BC: ad ogni iterazione dell’algoritmo salvo il grafo corrispondente;\
-Ciclo while 
+***DividiComponentiCheck***<sup>[2]</sup>;\
+***Check***<sup>[3]</sup>; \
+Interfaccia Neo4J: creazione del grafo di partenza;\
+Ciclo while {
 > in questo caso la limitazione è dato dal numero massimo di step,\
-	altrimenti la procedura prevede l'esaurimento di tutti gli archi
-- ***DividiComponentiCheck***<sup>[2]</sup>;
-- ***Check***<sup>[3]</sup>; 
+  altrimenti la procedura prevede l'esaurimento di tutti gli archi.
 - Per ogni componente connessa:
 	- ***CreateInput***;
 	> Viene definita la struttura delle proteine<sup>[1]</sup>
@@ -90,9 +92,11 @@ Ciclo while
 - Eliminazione dell’arco con betweenness massima;
 - Aggiungo alla lista BC il risultato ottenuto.
 
+}\
 Definisco l’oggetto Q=(step, lista di componenti);\
 ***ComputeDamnQ***<sup>[9]</sup>;\
-***QComparator***<sup>[10]</sup>.
+***QComparator***<sup>[10]</sup> restituisce il grafo ottimo;\
+Interfaccia Neo4J: creazione del grafo ottimo.
 
 	
 	
