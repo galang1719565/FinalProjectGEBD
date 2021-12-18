@@ -218,8 +218,70 @@ public class JcomeJava {
 		
       	
       	
-         /********************NEO4J********************/
+          
 			
+         
+         
+         
+         
+         
+         
+         /**********************ALGORTIMO*********************/
+		     Integer stepmax = 5;
+			 System.out.println( "\n"
+		         		+ "\t\t\t\t   ____________________________\n"
+		 				+ "\t\t\t\t  |                            |\n"
+		         		+ "\t\t\t\t  | Numero di step massimo = "+stepmax+" |\n"
+		 				+ "\t\t\t\t  |____________________________|\n"
+		 				+ "\n"
+		 				+ "");
+			 Integer min_comp = 10; 
+			 //Integer max_comp = 27;
+			 Integer max_comp = 100;
+			 if(max_comp<100)System.out.println( "\n"
+		         		+ "\t\t\t\t  ______________________________\n"
+		 				+ "\t\t\t\t |                              |\n"
+		 				+ "\t\t\t\t | Numero minimo di nodi  =  "+min_comp+" |\n"
+		 				+ "\t\t\t\t | Numero massimo di nodi =  "+max_comp+" |\n"
+		 				+ "\t\t\t\t |______________________________|\n"
+		 				+ "\n"
+		 				+ "");
+  	
+      	/*
+		 * Lista su cui salverÃ² < <Step,Lista<archi della componente>, <arco,betweeness> >
+		 * ---> Per il calcolo di Q
+		 */
+		List<Tuple2<Tuple2<Integer,List<List<Tuple2<String,String>>>>,Tuple2<Tuple2<String,String>,Float>>> BC = 
+				new ArrayList<Tuple2<Tuple2<Integer,List<List<Tuple2<String,String>>>>,Tuple2<Tuple2<String,String>,Float>>>();
+
+		/*
+		 * Prendo gli archi e definisco le componenti
+		 */
+		
+		JavaRDD<ArrayList<Tuple2<String,String>>> AllEdges = Edges.map(e->{
+			ArrayList<Tuple2<String,String>> l = new ArrayList<Tuple2<String,String>>();
+			l.add(e);
+			return l;
+		});
+		JavaPairRDD<Integer,ArrayList<Tuple2<String,String>>> Edges3 = AllEdges.mapToPair(
+				e->new Tuple2<Integer,ArrayList<Tuple2<String,String>>>(1,e) );
+		Edges3 = Edges3.reduceByKey((l1,l2)->{l1.addAll(l2); return l1;});
+		AllEdges = Edges3.map(e->e._2);
+		
+		JavaRDD<ArrayList<Tuple2<String, String>>> EdgesCompon = AllEdges.flatMap(new DividiComponentiCheck());
+		
+		EdgesCompon=EdgesCompon.distinct().map(new Check()).distinct();
+		
+		//SELEZIONE DELLE COMPONENTI
+		if(sgrevato)EdgesCompon = EdgesCompon.filter(comp->(comp.size()>=min_comp&&comp.size()<=max_comp));
+		
+		JavaRDD<Tuple2<String,String>> Edges2 = EdgesCompon.flatMap(comp->comp.iterator());
+		JavaPairRDD<String,String> EdgesFiltered = Edges2.mapToPair(p->new Tuple2<String,String>(p._1,p._2));
+		Edges=EdgesFiltered;
+				
+		
+		/********************NEO4J********************/
+		
 			String uri = "bolt://localhost:7687";
 			AuthToken token = AuthTokens.basic("neo4j", "daje");
 			Driver driver = GraphDatabase.driver(uri, token);
@@ -232,7 +294,7 @@ public class JcomeJava {
 			String cql = "match (n) detach delete n";
 	   		s.run(cql);   	
 	   		
-	        List<String> nodi = Nodes.collect();
+	        List<String> nodi = Edges.keys().union(Edges.values()).distinct().collect();
 	        int count = 0;
 			for(String n:nodi) {
 		        String cql1 = "CREATE (n: protein {Id: '" + n + "',Color: 'WHITE'})";
@@ -248,70 +310,45 @@ public class JcomeJava {
 			System.out.println("\tNumero nodi proteine creati: " + count + "\t\t\tNumero archi interazione aggiunti: " + count2 + "\n\n");
 			
 			//s.close();
-         
 			
-         
-         
-         
-         
-         
-         
-         /**********************ALGORTIMO*********************/
-		 System.out.println( "\n"
-	         		+ "\t\t\t\t   ____________________________\n"
-	 				+ "\t\t\t\t  |                            |\n"
-	         		+ "\t\t\t\t  | Numero di step massimo = 5 |\n"
-	 				+ "\t\t\t\t  |____________________________|\n"
-	 				+ "\n"
-	 				+ "");
-	     Integer stepmax = 5;
-  	
-      	/*
-		 * Lista su cui salverò < <Step,Lista<archi della componente>, <arco,betweeness> >
-		 * ---> Per il calcolo di Q
-		 */
-		List<Tuple2<Tuple2<Integer,List<List<Tuple2<String,String>>>>,Tuple2<Tuple2<String,String>,Float>>> BC = 
-				new ArrayList<Tuple2<Tuple2<Integer,List<List<Tuple2<String,String>>>>,Tuple2<Tuple2<String,String>,Float>>>();
-
-		
-		
+			
+		/*********************************************************/
+			
 		
 		//L'algoritmo esegue il medesimo codice fino ad esaurire tutti gli archi presenti
       	Integer step=0;
-      	while(!Edges.isEmpty()&&step<stepmax) {
+      	Edges=EdgesFiltered;
+		while(step<stepmax) {
 			step++;
 			System.out.println("\n\n\n\n\n\n"
 +"_______________________________________________________________________________________________________________________________________________\n\n"
-								 + "\n\t\t  S t e p :   "+step+"  \n\n"
++ "\n\t\t  S t e p :   "+step+"  \n\n"
 +"_______________________________________________________________________________________________________________________________________________\n"
 								 + "\n\n\n\n\n");
 			
-			/*
-			 * Prendo gli archi e definisco le componenti
-			 */
-			
-			JavaRDD<ArrayList<Tuple2<String,String>>> AllEdges = Edges.map(e->{
+			EdgesFiltered=Edges;
+		  	JavaRDD<ArrayList<Tuple2<String,String>>> AllEdgesFiltered = EdgesFiltered.map(e->{
 				ArrayList<Tuple2<String,String>> l = new ArrayList<Tuple2<String,String>>();
 				l.add(e);
 				return l;
 			});
-			JavaPairRDD<Integer,ArrayList<Tuple2<String,String>>> Edges3 = AllEdges.mapToPair(
+			JavaPairRDD<Integer,ArrayList<Tuple2<String,String>>> EdgesFiltered2 = AllEdgesFiltered.mapToPair(
 					e->new Tuple2<Integer,ArrayList<Tuple2<String,String>>>(1,e) );
-			Edges3 = Edges3.reduceByKey((l1,l2)->{l1.addAll(l2); return l1;});
-			AllEdges = Edges3.map(e->e._2);
+			EdgesFiltered2 = EdgesFiltered2.reduceByKey((l1,l2)->{l1.addAll(l2); return l1;});
+			AllEdgesFiltered = EdgesFiltered2.map(e->e._2);
 			
-			JavaRDD<ArrayList<Tuple2<String, String>>> EdgesComp = AllEdges.flatMap(new DividiComponentiCheck());
+			JavaRDD<ArrayList<Tuple2<String, String>>> EdgesComponFiltered = AllEdgesFiltered.flatMap(new DividiComponentiCheck());
 			
-			EdgesComp=EdgesComp.distinct().map(new Check()).distinct();
+			EdgesComponFiltered=EdgesComponFiltered.distinct().map(new Check()).distinct();
 			
-			//Elimino le componenti composte da pochi archi
-			if(sgrevato)EdgesComp = EdgesComp.filter(comp->comp.size()>=10);
 			
-			Integer NumeroComponent = 0;
-			NumeroComponent = EdgesComp.collect().size();
+			JavaRDD<Tuple2<String,String>> EdgesFiltered3 = EdgesComponFiltered.flatMap(comp->comp.iterator());
+			Edges = EdgesFiltered3.mapToPair(p->new Tuple2<String,String>(p._1,p._2));
+			
+			Integer NumeroComponent = (int) EdgesComponFiltered.count();
 			
 			/*
-			 * Lista su cui salverò < <Step,Lista<archi della componente>, <arco,betweeness> >
+			 * Lista su cui salverÃ² < <Step,Lista<archi della componente>, <arco,betweeness> >
 			 * ---> Per calcolare la betweeness massima e trovare l'arco da eliminare
 			 */
 			List<Tuple2<Tuple2<Integer,List<List<Tuple2<String,String>>>>,Tuple2<Tuple2<String,String>,Float>>> BC_k = 
@@ -319,7 +356,7 @@ public class JcomeJava {
 				
 			Integer num_comp = 0;
 			
-			for(ArrayList<Tuple2<String,String>> comp : EdgesComp.collect()) {
+			for(ArrayList<Tuple2<String,String>> comp : EdgesComponFiltered.collect()) {
 				num_comp++;
 				JavaPairRDD<String,String> Componente = jsc.parallelizePairs(comp);
 				/*
@@ -331,7 +368,7 @@ public class JcomeJava {
 						p.setValue(new Tuple3<Integer, String, ArrayList<Tuple2<String,String>>>(0, "GREY", null));	
 					return p;});
 				Integer remaining = 1; Integer all = (int) Start.count();
-				System.out.println("\n\t\tComponente  "+num_comp+" / "+NumeroComponent);
+				System.out.println("\n\t\tComponente  "+num_comp+" / "+EdgesComponFiltered.count());
 				System.out.println("\t\t\tProgress:");
 				Integer black; float progress;
 				while(remaining!=0) {
@@ -409,7 +446,7 @@ public class JcomeJava {
 		
 		
 		System.out.println("\n\n\n\n\t- Q -\n");
-		System.out.println("\tvalue\t\t-n° componenti-\t\tgraph");
+		System.out.println("\tvalue\t\t-nÂ° componenti-\t\tgraph");
 		for(Tuple2<List<List<Tuple2<String,String>>>,Float> q :damnQ.collect()) {
 			DecimalFormat df = new DecimalFormat("#.###");
 			Integer n_edg = q._1().size();
@@ -445,12 +482,12 @@ public class JcomeJava {
 				+ "\t\t\t|__________________________________________________________________________________________|\n\n\n");
 		count=0;
 		System.out.println("\t\t\t\tQ = "+maxQ._2()+"\n");
-		if(!sgrevato)System.out.println("\t\t\t\tComponente\t.\tArchi");
-		else System.out.println("\t\t\t\tComponente\t.\tN° archi");
+		if(!sgrevato)System.out.println("\t\t\t\tComponente\t\tArchi");
+		else System.out.println("\t\t\t\tComponente\t\tNÂ° archi");
 		for(List<Tuple2<String,String>> comp : maxQ_graph) {
 			count++;
-			if(!sgrevato)System.out.println("\t\t\t\t"+count+".\t"+comp);
-			else System.out.println("\t\t\t\t"+count+".\t"+comp.size());
+			if(!sgrevato)System.out.println("\t\t\t\t"+count+".\t\t"+comp);
+			else System.out.println("\t\t\t\t"+count+".\t\t"+comp.size());
 			}
 		
 		System.out.println("\n\n\n\n\n\n"
@@ -506,7 +543,7 @@ public class JcomeJava {
 			}
 			System.out.println("\t\t\t  - Componente "+num_comp+" -");
 			while(remaining!=0) {
-				step++;	//n° of ForwardMR
+				step++;	//nÂ° of ForwardMR
 				System.out.println("\t\t\t      [Step "+step+"]");
 				Start = ForwardMR(Start);
 			   		String random = boh2.first();
@@ -553,6 +590,8 @@ public class JcomeJava {
 				+ "\t|                    t  h  e                    e  n  d                    |\n"
 				+ "\t|__________________________________________________________________________|\n\n\n\n\n\n");
 			
+		System.exit(1);
+		
 	}
 	
 }
