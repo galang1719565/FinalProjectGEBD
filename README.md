@@ -9,10 +9,10 @@
 >  - Tatangelo Francesco
 >  - Imperatori Giammarco
 
-Lo scopo del nostro progetto è individuare le iterazioni all’interno di un insieme di proteine.\
+Lo scopo del nostro progetto è individuare le interazioni all’interno di un insieme di proteine.\
 La rilevazione di queste possibili interazioni è cruciale poiché la rete PPI (protein-protein interaction) è una grande fonte di informazioni, fondamentali per vari studi biologici.
 
-L'approccio è stato quello di considerare questo insieme di proteine e di iterazioni come i nodi e gli archi di un grafo, motivo per cui la scelta di implementare ***Neo4J*** è risultata alquanto naturale.\
+L'approccio è stato quello di considerare questo insieme di proteine e di interazioni come i nodi e gli archi di un grafo, motivo per cui la scelta di implementare ***Neo4J*** è risultata alquanto naturale.\
 \
 Dal punto di vista pratico, l'algoritmo visita l'intero grafo, da ogni nodo, determinando quindi le componenti connesse ed in particolare i cammini minimi.
 Dalle occorrenze degli archi e dalla grandezza della componente interessata ricaviamo la ***betweenness***, una misura che quantifica il flusso che interessa un determinato arco.
@@ -25,9 +25,9 @@ Il problema è evidentemente un problema di flusso, ma si tratta anche di un pro
 
 # Dataset
 I dataset reali sono disponibili nel sito del [Database of Interacting Proteins](https://dip.doe-mbi.ucla.edu/dip) da cui è tratto in particolare quello da noi utilizzato:
-> [***R.Norv***](https://github.com/galang1719565/FinalProjectGEBD/blob/master/Rnorv20170205.txt) - 666 proteine, 619 iterazioni.
+> [***R.Norv***](https://github.com/galang1719565/FinalProjectGEBD/blob/master/Rnorv20170205.txt) - 666 proteine, 619 interazioni.
 
-Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le iterazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a **15**.
+Per ottimizzare i risultati, nel grafo abbiamo deciso di eliminare le interazioni del tipo (a)->(a) e soprattutto abbiamo limitato l’algoritmo a considerare le componenti connesse con un numero di elementi superiore a 10: nel nostro caso il numero di componenti cala drasticamente, da 177 a **15**.
 
 
 
